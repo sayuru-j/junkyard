@@ -7,7 +7,7 @@ import Layout from "../components/Layout";
 
 function Home() {
   return (
-    <div className="bg-background">
+    <div className="">
       <Layout>
         <Header />
         <Hero />

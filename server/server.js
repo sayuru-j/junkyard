@@ -6,24 +6,15 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 // Using cor to get requests from different domains
 const cors = require("cors");
-// Using mongoose to set databse connection
-const mongoose = require("mongoose");
 // Using dotenv to load environment variable using process.env
 require("dotenv").config();
 
-// Terminal color codes
-red = "\033[1;91m";
-green = "\033[1;92m";
-blue = "\033[1;94m";
+const connectDB = require("./config/db");
 
 const app = express();
 
 // DB connection
-URI = process.env.MONGO_DB;
-mongoose
-  .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log(green + "DB connection established"))
-  .catch((err) => console.log(err));
+connectDB();
 
 // Import routes
 const authRoutes = require("./routes/auth");

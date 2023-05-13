@@ -1,7 +1,12 @@
+import { Routes, Route } from "react-router-dom";
+import Home from "../pages/home";
+
 function Navigation() {
   return (
     <>
-      <Routes></Routes>
+      <Routes>
+        <Route path="/" exact Component={Home} />
+      </Routes>
     </>
   );
 }

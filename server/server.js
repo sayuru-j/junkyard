@@ -14,12 +14,12 @@ const connectDB = require("./config/db");
 const app = express();
 
 // DB connection
-connectDB();
+connectDB().then(r => console.log("Success on Connecting DB")).catch(e => console.log(e));
 
 // Import routes
-const authRoutes = require("./routes/auth");
+const authRoutes = require("./routes/authRoutes");
 
-const centerRoutes = require("./routes/center");
+const centerRoutes = require("./routes/centerRoutes");
 
 const productRoutes = require("./routes/productRT");
 const purchasedtRoutes = require("./routes/purchasedtRT");
@@ -38,7 +38,7 @@ app.use(
 // Middlewares
 app.use("/api", authRoutes);
 
-app.use("/api", centerRoutes);
+app.use("/api/centers", centerRoutes);
 
 app.use("/product", productRoutes);
 app.use("/purchasedt", purchasedtRoutes);

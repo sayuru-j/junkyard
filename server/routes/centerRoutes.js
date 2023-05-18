@@ -5,7 +5,7 @@ const router = express.Router();
 const { addNewCenterValidator } = require("../validators/centerValidator");
 const { runValidation } = require("../validators");
 
-// import controllers
+// Import controllers
 const {
   addCenter,
   viewCenter,

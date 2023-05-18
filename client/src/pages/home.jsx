@@ -7,14 +7,12 @@ import Layout from "../components/Layout";
 
 function Home() {
   return (
-    <div className="bg-background">
+    <>
       <Layout>
-        <Header />
         <Hero />
         <Services />
       </Layout>
-      <Footer />
-    </div>
+    </>
   );
 }
 

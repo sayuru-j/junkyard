@@ -47,7 +47,7 @@ const centerSchema = mongoose.Schema({
         required: true
     },
     capacity: {
-        type: String,
+        type: Number,
         required: true
     },
     photo_Url:{
@@ -56,7 +56,7 @@ const centerSchema = mongoose.Schema({
         required: true
     },
     services_Offered: {
-        type: String,
+        type: Array,
         trim: true
     }
 },

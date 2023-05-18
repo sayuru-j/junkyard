@@ -14,11 +14,9 @@ const {
   editCenter,
 } = require("../controllers/centerController");
 
-// hitpoint
-router.post("/addnewcenter", addNewCenterValidator, runValidation, addCenter);
-router.get("/centers", viewCenter);
-router.delete("/centers/:id", deleteCenter);
-router.get("/centers/:id", viewCenterById);
-router.put("/editcenter", editCenter);
+// Endpoints
+router.route("/addnewcenter").post(addNewCenterValidator, runValidation, addCenter);
+router.route("/").get(viewCenter);
+router.route("/:id").get(viewCenterById).put(editCenter).delete(deleteCenter);
 
 module.exports = router;

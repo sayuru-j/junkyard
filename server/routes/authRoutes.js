@@ -10,7 +10,7 @@ const {
 const { runValidation } = require("../validators");
 
 // Import from controllers
-const { signup, login } = require("../controllers/auth");
+const { signup, login } = require("../controllers/authController");
 
 // The data to send after hitting endpoint
 router.post("/register", userSignupValidator, runValidation, signup);

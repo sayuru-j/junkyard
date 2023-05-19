@@ -8,6 +8,8 @@ import UpdateCenter from "../components/center/UpdateCenter";
 import AccessDenied from "../components/AccessDenied";
 import { useEffect, useState } from "react";
 import CenterPublic from "../pages/user/center/centerPublic";
+import Userview from "../pages/user/fleet/userShedule";
+import Fleet from "../pages/admin/fleet/fleet";
 
 function Navigation() {
   const [userData, setUserData] = useState({});
@@ -24,10 +26,11 @@ function Navigation() {
         <Route path="/register" Component={Register} />
         <Route path="/login" Component={Login} />
 
-
         {/* Fleet */}
-        <Route path="/ManageFleet" Component={userData?.user?.role === "admin" ? Fleet : AccessDenied}/>
-        
+        <Route
+          path="/ManageFleet"
+          Component={userData?.user?.role === "admin" ? Fleet : Userview}
+        />
 
         {/* Center Routes */}
         <Route

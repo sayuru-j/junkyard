@@ -54,9 +54,11 @@ function Header() {
           <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
             PRODUCTS
           </h1>
-          <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
-            FLEET
-          </h1>
+          <a href="/ManageFleet">
+            <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
+              FLEET
+            </h1>
+          </a>
           <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
             CONTACT
           </h1>
@@ -114,9 +116,11 @@ function Header() {
           <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
             PRODUCTS
           </h1>
-          <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
-            FLEET
-          </h1>
+          <a href="/ManageFleet">
+            <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
+              FLEET
+            </h1>
+          </a>
           <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
             CONTACT
           </h1>

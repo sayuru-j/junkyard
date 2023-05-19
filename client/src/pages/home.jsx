@@ -7,10 +7,21 @@ import Layout from "../components/Layout";
 
 function Home() {
   return (
+<<<<<<< HEAD
     <>
       <Hero />
       <Services />
     </>
+=======
+    <div className="">
+      <Layout>
+        <Header />
+        <Hero />
+        <Services />
+      </Layout>
+      <Footer />
+    </div>
+>>>>>>> origin/fleet
   );
 }
 

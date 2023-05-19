@@ -24,6 +24,11 @@ const centerRoutes = require("./routes/centerRoutes");
 const productRoutes = require("./routes/productRT");
 const purchasedtRoutes = require("./routes/purchasedtRT");
 
+const scheduleRoutes = require("./routes/schedule");
+
+const vehicleRoutes = require("./routes/vehicle");
+
+
 // App middlewares
 app.use(morgan("dev"));
 app.use(bodyParser.json());
@@ -42,6 +47,10 @@ app.use("/api/centers", centerRoutes);
 
 app.use("/product", productRoutes);
 app.use("/purchasedt", purchasedtRoutes);
+
+app.use("/api/schedule", scheduleRoutes);
+
+app.use("/api/vehicle", vehicleRoutes);
 
 // Setting the PORT, backend runs
 const port = process.env.PORT;

@@ -12,7 +12,7 @@ import Layout from "./Layout";
 const Footer = () => {
   const [toggle, setToggle] = useState(false);
   return (
-    <div className="bg-white/50">
+    <div className="bg-white/50 pt-10">
       <Layout>
         <div className="hidden md:flex items-center md:justify-between justify-center text-primary">
           <div className="md:max-w-xl space-y-5">

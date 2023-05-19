@@ -1,8 +1,44 @@
 import { PhotographIcon, UserIcon } from '@heroicons/react/outline'
+import axios from 'axios'
+import { useState } from 'react'
 
 function VehicleAdd() {
+  const [state, setState] = useState({
+    model: "",
+    year: "",
+    fleet: "",
+    register: "",
+    description: "",
+  })
+  const [added, setAdded]= useState(false)
+
+  const handleChange = (item) => (e) => {
+    setState({ ...state, [item]: e.target.value})
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_API}/vehicle/add`, {
+        model: state.model,
+        year: state.year,
+        fleet: state.fleet,
+        register: state.register,
+        description: state.description
+      })
+
+      setAdded(response.data && true)
+
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
    <div className='w-full flex flex-col items-center justify-center'>
+      {JSON.stringify(state)}
     <div className='w-full flex justify-center py-4'>
     <h1 className='bg-accent px-4 py-1 rounded-full text-white font-medium text-[20px]'>Add New Vehicle</h1>
     </div>
@@ -11,12 +47,13 @@ function VehicleAdd() {
             <div className="border-r-2">
                 <img 
                 className="h-full rounded-l-xl object-cover"
-                src="https://thumbs.dreamstime.com/b/american-style-truck-freeway-pulling-load-transportation-theme-road-cars-174771780.jpg"
+                src="https://thumbs.dreamstime.com/z/modern-flat-isolated-industrial-garbage-truck-illustration-modern-flat-isolated-industrial-garbage-truck-illustration-suitable-117529488.jpg"
                 alt="truck-pic"
                 />
             </div>
             <div className="col-span-2 px-2">
-           <form>
+           <form onSubmit={handleSubmit}>
+
            <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
                 Upload Image
               </label>
@@ -37,74 +74,79 @@ function VehicleAdd() {
                 </div>
               </div>
 
-              <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="model-name" className="block text-sm font-medium leading-6 text-gray-900">
                 Vehicle Model Name
               </label>
               <div className="mt-2">
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
+                  name="model name"
+                  onChange={handleChange("model")}
+                  id="model"
                   autoComplete="given-name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
  
                     
-              <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="Year" className="block text-sm font-medium leading-6 text-gray-900">
                 Year
               </label>
               <div className="mt-2">
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
+                  name="Year"
+                  onChange={handleChange("year")}
+                  id="Year"
                   autoComplete="given-name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>   
 
-              <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="Fleet-Number" className="block text-sm font-medium leading-6 text-gray-900">
                 Fleet Number
               </label>
               <div className="mt-2">
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
+                  name="Fleet Number"
+                  onChange={handleChange("fleet")}
+                  id="fleet"
                   autoComplete="given-name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
 
-                <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="register-number" className="block text-sm font-medium leading-6 text-gray-900">
                 Register Number
               </label>
               <div className="mt-2">
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
+                  name="register number"
+                  onChange={handleChange("register")}
+                  id="register"
                   autoComplete="given-name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>      
 
-              <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="description" className="block text-sm font-medium leading-6 text-gray-900">
                 Description
               </label>
               <div className="mt-2">
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
+                  name="description"
+                  onChange={handleChange("description")}
+                  id="description"
                   autoComplete="given-name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div> 
 
               <div className='w-full flex py-4 items-center justify-center'>
-              <button className='bg-accent px-5 py-1 rounded-full text-white font-medium'>DONE</button>  
+              <button type='submit' className='bg-accent px-5 py-1 rounded-full text-white font-medium'>ADD</button>  
               </div>
 
            </form>

@@ -3,6 +3,9 @@ import Footer from "../../../components/Footer"
 import VehicleAdd from "../../../components/fleet/VehicleAdd"
 import Layout from "../../../components/Layout"
 import VehicleList from "../../../components/fleet/VehicleList"
+import SheduleList from "../../../components/fleet/SheduleList"
+import SheduleAdd from "../../../components/fleet/SheduleAdd"
+import UpdateVehicle from "../../../components/fleet/UpdateVehicle"
 
 function Fleet() {
   return (
@@ -10,8 +13,10 @@ function Fleet() {
     <Layout>
     <Header/>
     <VehicleAdd/>
+    <SheduleAdd/>
+    <UpdateVehicle/>
+    <SheduleList/>
     <VehicleList/>
-    
     </Layout>
     <Footer/>
     </>

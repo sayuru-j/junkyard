@@ -24,6 +24,11 @@ const centerRoutes = require("./routes/center");
 const productRoutes = require("./routes/productRT");
 const purchasedtRoutes = require("./routes/purchasedtRT");
 
+const scheduleRoutes = require("./routes/schedule");
+
+const vehicleRoutes = require("./routes/vehicle");
+
+
 // App middlewares
 app.use(morgan("dev"));
 app.use(bodyParser.json());
@@ -31,7 +36,7 @@ app.use(bodyParser.json());
 // app.use(cors())
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
   })
 );
 
@@ -42,6 +47,10 @@ app.use("/api", centerRoutes);
 
 app.use("/product", productRoutes);
 app.use("/purchasedt", purchasedtRoutes);
+
+app.use("/api/schedule", scheduleRoutes);
+
+app.use("/api/vehicle", vehicleRoutes);
 
 // Setting the PORT, backend runs
 const port = process.env.PORT;

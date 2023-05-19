@@ -14,7 +14,7 @@ const connectDB = require("./config/db");
 const app = express();
 
 // DB connection
-connectDB().then(r => console.log("Success on Connecting DB")).catch(e => console.log(e));
+connectDB().then(() => console.log("Success on Connecting DB")).catch(e => console.log(e));
 
 // Import routes
 const authRoutes = require("./routes/authRoutes");

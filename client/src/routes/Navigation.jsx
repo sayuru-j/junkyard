@@ -7,6 +7,7 @@ import AddNewCenter from "../components/center/AddNewCenter";
 import UpdateCenter from "../components/center/UpdateCenter";
 import AccessDenied from "../components/AccessDenied";
 import { useEffect, useState } from "react";
+import CenterPublic from "../pages/user/center/centerPublic";
 
 function Navigation() {
   const [userData, setUserData] = useState({});
@@ -40,6 +41,8 @@ function Navigation() {
             userData?.user?.role === "admin" ? UpdateCenter : AccessDenied
           }
         />
+
+        <Route path="/Centers" Component={CenterPublic} />
       </Routes>
     </>
   );

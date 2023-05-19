@@ -77,8 +77,16 @@ exports.viewCenterById = async (req, res) => {
   }
 };
 
-exports.editCenter = (req, res) => {
-  console.log(req.body);
+exports.editCenter = async (req, res) => {
+  console.log(req.body)
+  try {
+    const item = await Center.findOneAndUpdate({center_Id: req.params.id}, {...req.body});
+    if (item) {
+      return res.status(200).json(item);
+    }
+  } catch (e) {
+    return res.send(e);
+  }
 };
 
 exports.deleteCenter = async (req, res) => {
@@ -86,10 +94,9 @@ exports.deleteCenter = async (req, res) => {
     const item = await Center.findOneAndDelete({ center_Id: req.params.id });
     if (!item) {
       return res.status(404).send("Center not found");
-      res.send(item);
     }
     return res.status(200).send("Center Deleted");
   } catch (err) {
-    res.status(500).send(error.message);
+    res.status(500).send(err.message);
   }
 };

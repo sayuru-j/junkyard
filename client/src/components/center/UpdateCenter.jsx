@@ -25,6 +25,7 @@ function UpdateCenter() {
   const [image, setImage] = useState("");
   const [url, setUrl] = useState("");
   const [error, setError] = useState("");
+  const [centerDetails, setCenterDetails] = useState({});
 
   const handleChange = (item) => (e) => {
     setState({ ...state, [item]: e.target.value });
@@ -75,7 +76,7 @@ function UpdateCenter() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
+      const response = await axios.put(
         `${import.meta.env.VITE_API}/centers/addnewcenter`,
         {
           center_Id: "CID" + state.center_Id,
@@ -101,7 +102,23 @@ function UpdateCenter() {
 
   const params = useParams();
 
-  useEffect(() => {}, []);
+  const getCenter = async () => {
+    const id = params.id;
+
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API}/centers/${id}`
+      );
+
+      setCenterDetails(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getCenter(params);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col mt-10 gap-5">

@@ -4,9 +4,23 @@ import { useState, useEffect } from "react";
 import logo from "../assets/logo-w-text.png";
 import { UserIcon, MenuIcon } from "@heroicons/react/outline";
 import Layout from "./Layout";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [toggle, setToggle] = useState(false);
+  const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
+
+  const LogOut = async () => {
+    localStorage.removeItem("userData");
+
+    navigate(0);
+    navigate("/");
+  };
+
+  useEffect(() => {
+    setUserData(JSON.parse(localStorage.getItem("userData")));
+  }, []);
 
   return (
     <Layout>
@@ -28,9 +42,15 @@ function Header() {
           <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
             COLLECT
           </h1>
-          <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
-            CENTERS
-          </h1>
+          <a
+            href={
+              userData?.user?.role === "admin" ? "/ManageCenters" : "/Centers"
+            }
+          >
+            <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
+              CENTERS
+            </h1>
+          </a>
           <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
             PRODUCTS
           </h1>
@@ -40,14 +60,28 @@ function Header() {
           <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
             CONTACT
           </h1>
-          <button
-            className="font-semibold flex gap-1 items-center justify-center
+          {userData ? (
+            <button
+              className="font-semibold flex gap-1 items-center justify-center
         bg-primary hover:bg-accent text-white px-4 rounded-full"
-            type="button"
-          >
-            <UserIcon className="w-4" />
-            SIGN IN
-          </button>
+              type="button"
+              onClick={LogOut}
+            >
+              <UserIcon className="w-4" />
+              {userData?.user?.name}
+            </button>
+          ) : (
+            <a href="/login">
+              <button
+                className="font-semibold flex gap-1 items-center justify-center
+        bg-primary hover:bg-accent text-white px-4 rounded-full"
+                type="button"
+              >
+                <UserIcon className="w-4" />
+                SIGN IN
+              </button>
+            </a>
+          )}
         </div>
         <div className="lg:hidden">
           <MenuIcon
@@ -67,9 +101,16 @@ function Header() {
           <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
             COLLECT
           </h1>
-          <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
-            CENTERS
-          </h1>
+          <a
+            href={
+              userData?.user?.role === "admin" ? "/ManageCenters" : "/Centers"
+            }
+          >
+            <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
+              CENTERS
+            </h1>
+          </a>
+
           <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
             PRODUCTS
           </h1>
@@ -79,14 +120,28 @@ function Header() {
           <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
             CONTACT
           </h1>
-          <button
-            className="font-semibold flex gap-1 items-center justify-center
-        text-primary hover:text-accent rounded-full"
-            type="button"
-          >
-            <UserIcon className="w-4" />
-            SIGN IN
-          </button>
+          {userData ? (
+            <button
+              className="font-semibold flex gap-1 items-center justify-center
+        bg-primary hover:bg-accent text-white px-4 rounded-full"
+              type="button"
+              onClick={LogOut}
+            >
+              <UserIcon className="w-4" />
+              {userData?.user?.name}
+            </button>
+          ) : (
+            <a href="/login">
+              <button
+                className="font-semibold flex gap-1 items-center justify-center
+        bg-primary hover:bg-accent text-white px-4 rounded-full"
+                type="button"
+              >
+                <UserIcon className="w-4" />
+                SIGN IN
+              </button>
+            </a>
+          )}
         </div>
       </div>
     </Layout>

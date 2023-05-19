@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // import validators
-const { addNewCenterValidator } = require("../validators/centerValidator");
+const { addNewCenterValidator, updateCenterValidator} = require("../validators/centerValidator");
 const { runValidation } = require("../validators");
 
 // Import controllers
@@ -17,6 +17,6 @@ const {
 // Endpoints
 router.route("/addnewcenter").post(addNewCenterValidator, runValidation, addCenter);
 router.route("/").get(viewCenter);
-router.route("/:id").get(viewCenterById).put(editCenter).delete(deleteCenter);
+router.route("/:id").get(viewCenterById).put(updateCenterValidator, runValidation , editCenter).delete(deleteCenter);
 
 module.exports = router;

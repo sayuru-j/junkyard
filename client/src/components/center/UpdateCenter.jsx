@@ -121,7 +121,6 @@ function UpdateCenter() {
 
   return (
     <div className="min-h-screen flex flex-col mt-10 gap-5">
-      {JSON.stringify(state)}
       <div className="flex items-center text-primary gap-1">
         <h1 className="pl-1 font-medium text-lg">Adding A New Center</h1>
         <PlusCircleIcon className="w-5 animate-spin" />

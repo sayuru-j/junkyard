@@ -38,6 +38,7 @@ function Register() {
       );
 
       setSuccess(response.data.success);
+      navigate("/login");
     } catch (error) {
       setError(error.response.data.error);
     }

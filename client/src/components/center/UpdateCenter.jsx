@@ -6,26 +6,37 @@ import { AnnotationIcon } from "@heroicons/react/solid";
 
 function UpdateCenter() {
   const navigate = useNavigate();
-  const [state, setState] = useState({
-    center_Id: "",
-    center_Name: "",
-    address: "",
-    photo_Url: "",
-    supervisor: "",
-    phone_No: "",
-    email: "",
-    working_Hours_left: "",
-    working_Hours_right: "",
-    capacity: "",
-    accepted_Materials: "",
-    services_Offered: "",
-  });
+
+  const params = useParams();
+
+  const getCenter = async () => {
+    const id = params.id;
+
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API}/centers/${id}`
+      );
+
+      setState({
+        ...response.data,
+        working_Hours_left: response?.data?.operating_Hours?.substring(0, 5),
+        working_Hours_right: response?.data?.operating_Hours?.substring(9, 15),
+      });
+    } catch (error) {
+      setError(error);
+    }
+  };
+
+  useEffect(() => {
+    getCenter(params);
+  }, []);
+
+  const [state, setState] = useState({});
   const [selectedValues, setSelectedValues] = useState([]);
   const [selectedValues2, setSelectedValues2] = useState([]);
   const [image, setImage] = useState("");
   const [url, setUrl] = useState("");
   const [error, setError] = useState("");
-  const [centerDetails, setCenterDetails] = useState({});
 
   const handleChange = (item) => (e) => {
     setState({ ...state, [item]: e.target.value });
@@ -77,51 +88,40 @@ function UpdateCenter() {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `${import.meta.env.VITE_API}/centers/addnewcenter`,
+        `${import.meta.env.VITE_API}/centers/${params.id}`,
         {
-          center_Id: "CID" + state.center_Id,
+          center_Id: "CID" + state.center_Id.replace("CID", ""),
           center_Name: state.center_Name,
           address: state.address,
-          photo_Url: url,
+          photo_Url: url ? url : state.photo_Url,
           supervisor: state.supervisor,
           phone_No: state.phone_No,
           email: state.email,
           operating_Hours:
             state.working_Hours_left + " To " + state.working_Hours_right,
           capacity: state.capacity,
-          accepted_Materials: selectedValues,
-          services_Offered: selectedValues2,
+          accepted_Materials:
+            selectedValues.length > 0
+              ? selectedValues
+              : state.accepted_Materials,
+          services_Offered:
+            selectedValues2.length > 0
+              ? selectedValues2
+              : state.services_Offered,
         }
       );
 
       navigate(response?.data && "/ManageCenters");
+
+      // console.log(url);
     } catch (error) {
       setError(error?.response?.data?.error);
     }
   };
 
-  const params = useParams();
-
-  const getCenter = async () => {
-    const id = params.id;
-
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API}/centers/${id}`
-      );
-
-      setCenterDetails(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getCenter(params);
-  }, []);
-
   return (
     <div className="min-h-screen flex flex-col mt-10 gap-5">
+      {JSON.stringify(state)}
       <div className="flex items-center text-primary gap-1">
         <h1 className="pl-1 font-medium text-lg">Adding A New Center</h1>
         <PlusCircleIcon className="w-5 animate-spin" />
@@ -150,6 +150,7 @@ function UpdateCenter() {
                           name="center-id"
                           id="center-id"
                           onChange={handleChange("center_Id")}
+                          value={state?.center_Id?.replace("CID", "")}
                         />
                         <div className="absolute font-medium text-primary/50 left-0 bg-slate-200 h-full flex items-center px-4 rounded-l-md">
                           CID
@@ -168,6 +169,7 @@ function UpdateCenter() {
                         name="center-name"
                         id="center-name"
                         onChange={handleChange("center_Name")}
+                        value={state?.center_Name}
                       />
                     </div>
                     <div className="mb-3 space-y-2 w-full text-xs">
@@ -182,6 +184,7 @@ function UpdateCenter() {
                         name="address"
                         id="address"
                         onChange={handleChange("address")}
+                        value={state?.address}
                       />
                     </div>
                   </div>
@@ -199,6 +202,7 @@ function UpdateCenter() {
                         name="supervisor"
                         id="supervisor"
                         onChange={handleChange("supervisor")}
+                        value={state?.supervisor}
                       />
                     </div>
                     <div className="mb-3 space-y-2 w-full text-xs">
@@ -213,6 +217,7 @@ function UpdateCenter() {
                         name="phone-no"
                         id="phone-no"
                         onChange={handleChange("phone_No")}
+                        value={state?.phone_No}
                       />
                     </div>
                     <div className="mb-3 space-y-2 w-full text-xs">
@@ -227,6 +232,7 @@ function UpdateCenter() {
                         name="email"
                         id="email"
                         onChange={handleChange("email")}
+                        value={state?.email}
                       />
                     </div>
                   </div>
@@ -245,6 +251,7 @@ function UpdateCenter() {
                           name="working-hours-left"
                           id="working-hours-left"
                           onChange={handleChange("working_Hours_left")}
+                          value={state?.operating_Hours?.substring(0, 5)}
                         />
                         <span>To</span>
                         <input
@@ -255,6 +262,7 @@ function UpdateCenter() {
                           name="working-hours-right"
                           id="working-hours-right"
                           onChange={handleChange("working_Hours_right")}
+                          value={state?.operating_Hours?.substring(9, 15)}
                         />
                       </div>
                     </div>
@@ -271,6 +279,7 @@ function UpdateCenter() {
                           name="capacity"
                           id="capacity"
                           onChange={handleChange("capacity")}
+                          value={state?.capacity}
                         />
                         <div className="absolute font-medium text-primary/50 right-0 bg-slate-200 h-full flex items-center px-4 rounded-r-md">
                           KG
@@ -289,7 +298,7 @@ function UpdateCenter() {
                           className="text-sm text-primary/50 mt-2 flex items-center justify-center cursor-pointer w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                           type="button"
                         >
-                          Select from computer
+                          Change the photo
                         </p>
                       </label>
                     </div>
@@ -446,11 +455,26 @@ function UpdateCenter() {
                       </div>
                     </div>
 
-                    {image && (
+                    {image ? (
                       <div className="flex flex-col items-center w-1/3 justify-center">
                         <img
                           className="rounded-2xl max-h-48"
                           src={URL.createObjectURL(image)}
+                          alt=""
+                        />
+                        <button
+                          onClick={uploadImage}
+                          type="button"
+                          className="my-2 py-1 bg-primary text-white px-4 rounded-lg"
+                        >
+                          {url ? "Uploaded" : "Upload"}
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center w-1/3 justify-center">
+                        <img
+                          className="rounded-2xl max-h-48"
+                          src={state?.photo_Url}
                           alt=""
                         />
                         <button

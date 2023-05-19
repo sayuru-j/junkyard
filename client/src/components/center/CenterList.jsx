@@ -75,7 +75,7 @@ function CenterList() {
     <>
       <div ref={table}>
         <div className="pb-2 flex w-full items-center justify-between py-4">
-          <h1 className="text-sm font-medium">
+          <h1 className="text-sm font-medium text-primary">
             Total: {query ? filteredCenters.length : centers.length}
           </h1>
           <div className="max-w-lg w-full">
@@ -142,19 +142,21 @@ function CenterList() {
                       <td className="px-4 py-4 italic">{center.email}</td>
                       <td className="px-4 py-4">{center.operating_Hours}</td>
                       <td className="px-4 py-4">
-                        <div key={center._id} className="flex gap-3 max-w-10">
+                        <div
+                          key={center._id}
+                          className="flex gap-3 items-center"
+                        >
                           {center.accepted_Materials.map((material) => (
-                            <div
-                              key={material}
-                              className="rounded-full inline-flex px-4 py-1 text-xs text-green-700 font-medium bg-green-50"
-                            >
-                              {material}
+                            <div key={material}>
+                              <p className="text-xs bg-green-50 text-green-700 font-medium inline-flex items-center text-center py-1 px-2 rounded-lg">
+                                {material}
+                              </p>
                             </div>
                           ))}
                         </div>
                       </td>
                       <td className="px-4 py-4">
-                        <div className="rounded-full inline-flex px-4 py-1 text-xs text-purple-700/80 font-medium bg-purple-50">
+                        <div className="rounded-lg inline-flex px-4 py-1 text-xs text-purple-700/80 font-medium bg-purple-50">
                           {center.capacity}
                           <span className="pl-1 text-purple-700/50">KG</span>
                         </div>
@@ -172,7 +174,7 @@ function CenterList() {
                         <div key={center._id} className="flex gap-3 max-w-10">
                           {center.services_Offered.map((service) => (
                             <div key={service} className="flex">
-                              <h1 className="rounded-full px-4 py-1 text-xs text-red-700 font-medium bg-red-50">
+                              <h1 className="rounded-lg inline-flex items-center text-center px-4 py-1 text-xs text-red-700 font-medium bg-red-50">
                                 {service}
                               </h1>
                             </div>
@@ -204,19 +206,21 @@ function CenterList() {
                       <td className="px-4 py-4 italic">{center.email}</td>
                       <td className="px-4 py-4">{center.operating_Hours}</td>
                       <td className="px-4 py-4">
-                        <div key={center._id} className="flex gap-3 max-w-10">
+                        <div
+                          key={center._id}
+                          className="flex gap-3 items-center"
+                        >
                           {center.accepted_Materials.map((material) => (
-                            <div
-                              key={material}
-                              className="rounded-full inline-flex px-4 py-1 text-xs text-green-700 font-medium bg-green-50"
-                            >
-                              {material}
+                            <div key={material}>
+                              <p className="text-xs bg-green-50 text-green-700 font-medium inline-flex items-center text-center py-1 px-2 rounded-lg">
+                                {material}
+                              </p>
                             </div>
                           ))}
                         </div>
                       </td>
                       <td className="px-4 py-4">
-                        <div className="rounded-full inline-flex px-4 py-1 text-xs text-purple-700/80 font-medium bg-purple-50">
+                        <div className="rounded-lg inline-flex px-4 py-1 text-xs text-purple-700/80 font-medium bg-purple-50">
                           {center.capacity}
                           <span className="pl-1 text-purple-700/50">KG</span>
                         </div>
@@ -234,7 +238,7 @@ function CenterList() {
                         <div key={center._id} className="flex gap-3 max-w-10">
                           {center.services_Offered.map((service) => (
                             <div key={service} className="flex">
-                              <h1 className="rounded-full px-4 py-1 text-xs text-red-700 font-medium bg-red-50">
+                              <h1 className="rounded-lg inline-flex items-center text-center px-4 py-1 text-xs text-red-700 font-medium bg-red-50">
                                 {service}
                               </h1>
                             </div>

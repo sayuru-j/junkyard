@@ -24,6 +24,11 @@ function Navigation() {
         <Route path="/register" Component={Register} />
         <Route path="/login" Component={Login} />
 
+
+        {/* Fleet */}
+        <Route path="/ManageFleet" Component={userData?.user?.role === "admin" ? Fleet : AccessDenied}/>
+        
+
         {/* Center Routes */}
         <Route
           path="/ManageCenters"

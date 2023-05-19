@@ -8,10 +8,8 @@ import Layout from "../components/Layout";
 function Home() {
   return (
     <>
-      <Layout>
-        <Hero />
-        <Services />
-      </Layout>
+      <Hero />
+      <Services />
     </>
   );
 }

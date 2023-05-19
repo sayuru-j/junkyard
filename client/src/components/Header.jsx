@@ -39,9 +39,9 @@ function Header() {
           <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
             HOME
           </h1>
-          <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
+          <a href="/addcollect"><h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
             COLLECT
-          </h1>
+          </h1></a>
           <a
             href={
               userData?.user?.role === "admin" ? "/ManageCenters" : "/Centers"
@@ -100,9 +100,9 @@ function Header() {
           <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
             HOME
           </h1>
-          <h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
+          <a href="/addcollect"><h1 className="font-semibold text-primary hover:text-accent cursor-pointer">
             COLLECT
-          </h1>
+          </h1></a>
           <a
             href={
               userData?.user?.role === "admin" ? "/ManageCenters" : "/Centers"

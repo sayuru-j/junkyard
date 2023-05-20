@@ -52,7 +52,7 @@ function getCollection() {
   };
 
   return (
-    <div className="my-20 flex flex-col items-center">
+    <div className="my-20 min-h-screen flex flex-col items-center">
       <h1 className="my-2 text-center font-medium text-lg">
         Manage Collection
       </h1>

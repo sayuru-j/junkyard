@@ -100,7 +100,9 @@ function getCollection() {
                       {collection.name}
                     </th>
                     <td className="px-6 py-4">{collection.address}</td>
-                    <td className="px-6 py-4">{collection.collectionDate}</td>
+                    <td className="px-6 py-4">
+                      {collection.collectionDate.split("T")[0]}
+                    </td>
                     <td className="px-6 py-4">{collection.wasteType}</td>
                     <td className="px-6 py-4">{collection.quantity}</td>
 

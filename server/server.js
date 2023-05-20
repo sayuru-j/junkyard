@@ -28,6 +28,8 @@ const scheduleRoutes = require("./routes/schedule");
 
 const vehicleRoutes = require("./routes/vehicle");
 
+const collectionRoutes = require("./routes/collectionRoutes");
+
 
 // App middlewares
 app.use(morgan("dev"));
@@ -51,6 +53,8 @@ app.use("/purchasedt", purchasedtRoutes);
 app.use("/api/schedule", scheduleRoutes);
 
 app.use("/api/vehicle", vehicleRoutes);
+
+app.use("/api/collection", collectionRoutes);
 
 // Setting the PORT, backend runs
 const port = process.env.PORT;

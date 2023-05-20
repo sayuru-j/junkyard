@@ -10,6 +10,10 @@ import { useEffect, useState } from "react";
 import CenterPublic from "../pages/user/center/centerPublic";
 import Userview from "../pages/user/fleet/userShedule";
 import Fleet from "../pages/admin/fleet/fleet";
+import getCollection from "../components/collect/getCollection";
+import EditCollection from "../components/collect/EditCollection";
+import AddCollection from "../components/collect/addCollect";
+import collectSuccessful from "../components/collect/collectSucess";
 
 function Navigation() {
   const [userData, setUserData] = useState({});
@@ -25,6 +29,21 @@ function Navigation() {
         {/* Login Routes */}
         <Route path="/register" Component={Register} />
         <Route path="/login" Component={Login} />
+
+        {/* Collect Routes */}
+        <Route
+          path="/addcollect"
+          Component={
+            userData?.user?.role === "admin" ? getCollection : AddCollection
+          }
+        />
+        <Route path="/getCollectin" Component={getCollection} />
+        <Route
+          path="/editCollection/:id"
+          Component={userData?.user?.role === "admin" && EditCollection}
+        />
+
+        <Route path="/CollectSuccess" Component={collectSuccessful} />
 
         {/* Fleet */}
         <Route

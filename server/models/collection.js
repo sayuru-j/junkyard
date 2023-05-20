@@ -16,7 +16,6 @@ const collectionSchema = mongoose.Schema({
       },
       wasteType: {
         type: String,
-        enum: ["Plastic", "Paper", "Glass", "Metal"],
         required: true
       },
       quantity: {

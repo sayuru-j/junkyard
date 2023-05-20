@@ -78,9 +78,12 @@ exports.viewCenterById = async (req, res) => {
 };
 
 exports.editCenter = async (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   try {
-    const item = await Center.findOneAndUpdate({center_Id: req.params.id}, {...req.body});
+    const item = await Center.findOneAndUpdate(
+      { center_Id: req.params.id },
+      { ...req.body }
+    );
     if (item) {
       return res.status(200).json(item);
     }

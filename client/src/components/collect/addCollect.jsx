@@ -67,7 +67,8 @@ function AddCollection() {
                       >
                         Name
                       </label>
-                      <input
+                      <input 
+                      required= {true}
                         type="text"
                         name="first_name"
                         id="first_name"
@@ -84,7 +85,7 @@ function AddCollection() {
                       >
                         Address
                       </label>
-                      <input
+                      <input required= {true}
                         type="text"
                         name="last_name"
                         id="last_name"
@@ -101,7 +102,7 @@ function AddCollection() {
                       >
                         Collection Date
                       </label>
-                      <input
+                      <input required= {true}
                         type="date"
                         name="email_address"
                         id="email_address"
@@ -118,7 +119,7 @@ function AddCollection() {
                       >
                         Waste Type
                       </label>
-                      <select
+                      <select required= {true}
                         id="country"
                         name="country"
                         autoComplete="country"
@@ -168,7 +169,7 @@ function AddCollection() {
                       >
                         Quantity
                       </label>
-                      <input
+                      <input required= {true}
                         type="number"
                         name="state"
                         id="state"

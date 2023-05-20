@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 function EditCollection() {
   const params = useParams();
@@ -14,18 +15,21 @@ function EditCollection() {
     wasteType: "",
     quantity: "",
   });
+  const [changing, setChanging] = useState(false);
   const getCollection = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API}/collection/${params._id}`
+        `${import.meta.env.VITE_API}/collection/${params.id}`
       );
       setCollection(response.data);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   useEffect(() => {
     getCollection();
-    setIsDeleted(false);
-  }, [isDeleted]);
+  }, []);
 
   const handleDelete = async (_id) => {
     try {
@@ -40,26 +44,28 @@ function EditCollection() {
     }
   };
 
-  console.log(collection);
-
   const handleChange = (item) => (e) => {
     setState({
       ...state,
       [item]: e.target.value,
     });
+
+    setChanging(true);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API}/collection/add`,
+      const response = await axios.put(
+        `${import.meta.env.VITE_API}/collection/${params.id}`,
         {
-          name: state.name,
-          address: state.address,
-          collectionDate: state.collectionDate,
-          wasteType: state.wasteType,
-          quantity: state.quantity,
+          name: state.name ? state.name : collection.name,
+          address: state.address ? state.address : collection.address,
+          collectionDate: state.collectionDate
+            ? state.collectionDate
+            : collection.collectionDate,
+          wasteType: state.wasteType ? state.wasteType : collection.wasteType,
+          quantity: state.quantity ? state.quantity : collection.quantity,
         }
       );
 
@@ -75,6 +81,7 @@ function EditCollection() {
     <section className="min-h-screen">
       <h1 className="mt-16 font-medium text-lg">Edit Pickup Collection</h1>
       <div className="sm:mt-0">
+        {JSON.stringify(state)}
         <div className="md:grid md:grid-cols-3 md:gap-6 mt-10">
           <div className="mt-5 md:mt-0 md:col-span-4">
             <form onSubmit={handleSubmit}>
@@ -95,6 +102,7 @@ function EditCollection() {
                         autoComplete="given-name"
                         className="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         onChange={handleChange("name")}
+                        defaultValue={collection?.name}
                       />
                     </div>
 
@@ -112,6 +120,7 @@ function EditCollection() {
                         autoComplete="family-name"
                         className="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         onChange={handleChange("address")}
+                        defaultValue={collection?.address}
                       />
                     </div>
 
@@ -129,6 +138,7 @@ function EditCollection() {
                         autoComplete="email"
                         className="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         onChange={handleChange("collectionDate")}
+                        defaultValue={collection?.collectionDate?.split("T")[0]}
                       />
                     </div>
 
@@ -145,6 +155,7 @@ function EditCollection() {
                         autoComplete="country"
                         className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         onChange={handleChange("wasteType")}
+                        placeholder={collection?.wasteType}
                       >
                         <option>Select</option>
                         <option value="Plastic">Plastic</option>
@@ -195,6 +206,7 @@ function EditCollection() {
                         id="state"
                         className="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         onChange={handleChange("quantity")}
+                        defaultValue={collection?.quantity}
                       />
                     </div>
                   </div>

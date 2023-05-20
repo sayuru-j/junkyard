@@ -1,17 +1,21 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
+import { Button, Box } from "@mui/material";
+import ReactToPrint from "react-to-print";
 import {
   TrashIcon,
   PencilIcon,
   DocumentDownloadIcon,
   RefreshIcon,
 } from "@heroicons/react/outline";
+import { useNavigate } from "react-router";
 
 function getCollection() {
   const [collections, setCollections] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
   const [query, setQuery] = useState("");
   const [filteredCollection, setFilteredCollection] = useState([]);
+  const navigate = useNavigate()
   const getCollections = async () => {
     try {
       const response = await axios.get(
@@ -32,6 +36,9 @@ function getCollection() {
     setFilteredCollection(filtered);
   };
 
+  const componentRef = useRef();
+
+
   useEffect(() => {
     getCollections();
     handleSearch(collections, query);
@@ -46,10 +53,14 @@ function getCollection() {
       if (response.data) {
         setIsDeleted(true);
       }
+      navigate(0)
+
     } catch (error) {
       console.log(error);
     }
   };
+
+
 
   return (
     <div className="my-20 min-h-screen flex flex-col items-center">
@@ -57,14 +68,21 @@ function getCollection() {
         Manage Collection
       </h1>
 
+      <div className="w-full flex justify-between items-center">
+      
       <input
         className="w-full inline-flex py-2 my-4 max-w-sm rounded-lg px-2 outline-none shadow-md"
         type="text"
         placeholder="Search..."
         onChange={(e) => setQuery(e.target.value)}
       />
+      <ReactToPrint trigger={() =>
+        <Button  type="submit" variant="outlined" color="error">+ Download</Button>}
+        content={() => componentRef.current}/>
+      </div>
 
-      <div className="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
+       
+      <div className="relative w-full overflow-x-auto shadow-md sm:rounded-lg" ref={componentRef}>
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>

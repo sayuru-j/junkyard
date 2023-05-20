@@ -13,6 +13,7 @@ import Fleet from "../pages/admin/fleet/fleet";
 import getCollection from "../components/collect/getCollection";
 import EditCollection from "../components/collect/EditCollection";
 import AddCollection from "../components/collect/addCollect";
+import collectSuccessful from "../components/collect/collectSucess";
 
 function Navigation() {
   const [userData, setUserData] = useState({});
@@ -41,6 +42,8 @@ function Navigation() {
           path="/editCollection/:id"
           Component={userData?.user?.role === "admin" && EditCollection}
         />
+
+        <Route path="/CollectSuccess" Component={collectSuccessful} />
 
         {/* Fleet */}
         <Route

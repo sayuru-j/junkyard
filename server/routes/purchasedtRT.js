@@ -7,13 +7,16 @@ router.route("/in").post((req,res)=>{             //ADD Purchse
     const pdaddress = req.body.pdaddress;      //frontEnd parsing data to backEnd by REQUEST BY BODY method. //number nam method eka isrrhin danna ona
     const pdemail = req.body.pdemail;        //frontEnd data gets here.
     const pdtel = Number(req.body.pdtel);
+    const total = Number(req.body.total);
     
     const newPurchase = new Purchase({         //make new objects for model
 
         pdname,
-        pdaddress,                  //save data for these variables
+        pdaddress,                  
         pdemail,
-        pdtel
+        pdtel,
+        total
+       
         
     })
    

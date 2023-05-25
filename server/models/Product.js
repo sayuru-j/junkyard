@@ -17,9 +17,9 @@ const ProductSchema = new Schemaob({
 
     primage :{
 
-        type : String,
-        required : true,
-       
+        type: String,
+        trim: true,
+        required: true
          
     },
 
@@ -42,6 +42,7 @@ const ProductSchema = new Schemaob({
         required : true,
          
     }
+    
 
     
 })
